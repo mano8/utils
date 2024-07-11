@@ -7,6 +7,7 @@ Contain static and class methods.
 import os
 import sys
 import time
+from typing import Optional
 from ve_utils.utype import UType
 from ve_utils.utime import UTime
 
@@ -158,7 +159,7 @@ class USys:
             raise EnvironmentError('Unsupported platform')
 
     @staticmethod
-    def get_operating_system_type() -> str or None:
+    def get_operating_system_type() -> Optional[str]:
         """
         Return the operating system type.
 

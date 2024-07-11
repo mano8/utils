@@ -6,6 +6,7 @@ Contain only static methods.
 """
 import time
 from datetime import datetime
+from typing import Optional, Union
 from ve_utils.utype import UType as Ut
 
 __author__ = "Eli Serra"
@@ -21,7 +22,7 @@ class UTime:
 
     @staticmethod
     def get_timestamp_from_datetime(date_time: datetime
-                                    ) -> float or None:
+                                    ) -> Optional[float]:
         """Get timestamp from datetime object."""
         result = None
         if isinstance(date_time, datetime):
@@ -29,7 +30,7 @@ class UTime:
         return result
 
     @staticmethod
-    def get_utc_timestamp(timestamp: int or float) -> float:
+    def get_utc_timestamp(timestamp: Union[int, float]) -> float:
         """Get timestamp from datetime object."""
         result = None
         if Ut.is_numeric(timestamp, not_null=True):
@@ -40,9 +41,9 @@ class UTime:
 
     @staticmethod
     def time_to_string(
-                       timestamp: int or float,
+                       timestamp: Union[int, float],
                        micro: bool = False
-                       ) -> str or None:
+                       ) -> Optional[str]:
         """
         Convert a time in seconds to a string.
 
@@ -73,9 +74,9 @@ class UTime:
 
     @staticmethod
     def get_elapsed_time(
-                            tim: int or float,
-                            default: int or float or None = None
-                            ) -> int or float or None:
+                            tim: Union[int, float],
+                            default: Optional[Union[int, float]] = None
+                            ) -> Optional[Union[int, float]]:
         """
         Return the elapsed time between two timestamps.
 
@@ -99,8 +100,8 @@ class UTime:
     def string_to_time(
             text: str,
             time_format: str,
-            default: float or None = None
-            ) -> float or None:
+            default: Optional[float] = None
+            ) -> Optional[float]:
         """
         Convert a string to a time object.
 
@@ -124,9 +125,9 @@ class UTime:
 
     @staticmethod
     def get_time_search(
-            timestamp: int or float,
+            timestamp: Union[int, float],
             time_search: str = '23:59:59'
-            ) -> int or float:
+            ) -> Union[int, float]:
         """
         Return formatted time.
 

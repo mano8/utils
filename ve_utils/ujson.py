@@ -4,6 +4,7 @@ Json helper methods.
 Optional module.
 """
 import simplejson as json
+from typing import Optional
 
 __author__ = "Eli Serra"
 __copyright__ = "Copyright 2020, Eli Serra"
@@ -17,7 +18,7 @@ class UJson:
     """Json Helper methods."""
 
     @staticmethod
-    def loads_json(data: str, raise_errors: bool = True, **kwargs) -> object or None:
+    def loads_json(data: str, raise_errors: bool = True, **kwargs) -> Optional[object]:
         """
         Return object from json string data.
 
@@ -37,7 +38,7 @@ class UJson:
             the first parameter is string data to deserialize
         :param raise_errors: bool=True: Active or disable trowed exceptions.
             If False don't trow any exception only return None
-        :return: object or None:
+        :return: Optional[object]:
             Deserialized json string, or None if raise_errors is False and exception is trowed
         :raises json.JSONDecodeError: will be raised if the given JSON string is not valid.
         .. seealso::  https://simplejson.readthedocs.io/en/latest/#simplejson.loads
@@ -52,7 +53,7 @@ class UJson:
         return result
 
     @staticmethod
-    def load_json(data: object, raise_errors: bool = True, **kwargs) -> object or None:
+    def load_json(data: object, raise_errors: bool = True, **kwargs) -> Optional[object]:
         """
         Return object from json file object.
 
@@ -71,7 +72,7 @@ class UJson:
         :param data: str: Json data to deserialize
         :param raise_errors: bool=True: Active or disable trowed exceptions.
             If False don't trow any exception only return None
-        :return: object or None:
+        :return: Optional[object]:
             Deserialized json file, or None if raise_errors is False and exception is trowed
         :raises json.JSONDecodeError: will be raised if the given JSON document is not valid.
         .. seealso::  https://simplejson.readthedocs.io/en/latest/#simplejson.load
@@ -102,7 +103,7 @@ class UJson:
         :param data: str: Json data to deserialize
         :param raise_errors: bool=True: Active or disable trowed exceptions.
             If False don't trow any exception only return None
-        :return: object or None:
+        :return: Optional[object]:
             Serialized json object as string, or None if raise_errors is False and exception is trowed
         .. seealso::  https://simplejson.readthedocs.io/en/latest/#simplejson.dumps
         """

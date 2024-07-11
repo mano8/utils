@@ -4,6 +4,8 @@ Helper used to test and format data.
 
 Contain only static methods.
 """
+from typing import Optional, Union
+
 __author__ = "Eli Serra"
 __copyright__ = "Copyright 2020, Eli Serra"
 __deprecated__ = False
@@ -165,8 +167,8 @@ class UType:
     @staticmethod
     def is_str(value: any,
                not_null: bool = False,
-               mini: int or None = None,
-               maxi: int or None = None,
+               mini: Optional[int] = None,
+               maxi: Optional[int] = None,
                eq: int = None
                ) -> bool:
         """
@@ -211,8 +213,8 @@ class UType:
                not_null: bool = False,
                positive: bool = False,
                negative: bool = False,
-               mini: int or None = None,
-               maxi: int or None = None,
+               mini: Optional[int] = None,
+               maxi: Optional[int] = None,
                eq: int = None
                ) -> bool:
         """
@@ -247,8 +249,8 @@ class UType:
                  not_null: bool = False,
                  positive: bool = False,
                  negative: bool = False,
-                 mini: int or None = None,
-                 maxi: int or None = None,
+                 mini: Optional[int] = None,
+                 maxi: Optional[int] = None,
                  eq: int = None
                  ) -> bool:
         """
@@ -283,8 +285,8 @@ class UType:
                    not_null: bool = False,
                    positive: bool = False,
                    negative: bool = False,
-                   mini: int or None = None,
-                   maxi: int or None = None,
+                   mini: Optional[int] = None,
+                   maxi: Optional[int] = None,
                    eq: int = None
                    ) -> bool:
         """
@@ -322,8 +324,8 @@ class UType:
     @staticmethod
     def is_dict(value: any,
                 not_null: bool = False,
-                min_items: int or None = None,
-                max_items: int or None = None,
+                min_items: Optional[int] = None,
+                max_items: Optional[int] = None,
                 eq: int = None
                 ) -> bool:
         """
@@ -350,8 +352,8 @@ class UType:
     @staticmethod
     def is_dict_key(value: any,
                     not_null: bool = False,
-                    mini: int or None = None,
-                    maxi: int or None = None,
+                    mini: Optional[int] = None,
+                    maxi: Optional[int] = None,
                     eq: int = None
                     ) -> bool:
         """
@@ -383,8 +385,8 @@ class UType:
 
     @staticmethod
     def is_str_dict_key(value: any,
-                        mini: int or None = None,
-                        maxi: int or None = None,
+                        mini: Optional[int] = None,
+                        maxi: Optional[int] = None,
                         eq: int = None
                         ) -> bool:
         """
@@ -406,8 +408,8 @@ class UType:
     @staticmethod
     def is_tuple(value: any,
                  not_null: bool = False,
-                 min_items: int or None = None,
-                 max_items: int or None = None,
+                 min_items: Optional[int] = None,
+                 max_items: Optional[int] = None,
                  eq: int = None
                  ) -> bool:
         """
@@ -431,8 +433,8 @@ class UType:
     @staticmethod
     def is_list(value: any,
                 not_null: bool = False,
-                min_items: int or None = None,
-                max_items: int or None = None,
+                min_items: Optional[int] = None,
+                max_items: Optional[int] = None,
                 eq: int = None
                 ) -> bool:
         """
@@ -465,14 +467,14 @@ class UType:
 
     @staticmethod
     def is_valid_format(value: any,
-                        data_type: str or type,
+                        data_type: Union[str, type],
                         not_null: bool = False,
                         positive: bool = False,
                         negative: bool = False,
-                        mini: int or None = None,
-                        maxi: int or None = None,
+                        mini: Optional[int] = None,
+                        maxi: Optional[int] = None,
                         eq: int = None
-                        ) -> bool or None:
+                        ) -> Optional[bool]:
         """
         Check if input value is a data_type format
 
@@ -551,7 +553,7 @@ class UType:
         )
 
     @staticmethod
-    def get_int(value: any, default: int or None = 0) -> int or None:
+    def get_int(value: any, default: Optional[int] = 0) -> Optional[int]:
         """
         Take a value and returns it as an integer.
 
@@ -566,7 +568,7 @@ class UType:
             return default
 
     @staticmethod
-    def get_float(value: any, default: float or None = 0.0) -> float or None:
+    def get_float(value: any, default: Optional[float] = 0.0) -> Optional[float]:
         """
         Take a value and returns it as a float value.
 
@@ -583,8 +585,8 @@ class UType:
     @staticmethod
     def get_rounded_float(nb: any,
                           rnd: int,
-                          default: float or None = 0.0
-                          ) -> float or None:
+                          default: Optional[float] = 0.0
+                          ) -> Optional[float]:
         """
         Return the rounded value of a float number.
 
@@ -600,7 +602,7 @@ class UType:
             return default
 
     @staticmethod
-    def get_str(value: any, default: str or None = None) -> str or None:
+    def get_str(value: any, default: Optional[str] = None) -> Optional[str]:
         """
         Take a value and returns it as a str value.
 
@@ -622,7 +624,7 @@ class UType:
     @staticmethod
     def format_by_type(value: any,
                        data_type: str,
-                       float_round: int or None = None
+                       float_round: Optional[int] = None
                        ):
         """
         Format value to data_type format.
@@ -668,8 +670,8 @@ class UType:
     @staticmethod
     def int_to_formatted_string(
             nb: int,
-            default: str or None = None
-            ) -> str or None:
+            default: Optional[str] = None
+            ) -> Optional[str]:
         """
         Take an integer and returns a string with the number formatted.
 
@@ -689,9 +691,9 @@ class UType:
 
     @staticmethod
     def str_to_bool(
-            s: bool or str or int,
-            default: bool or None = False
-            ) -> bool or None:
+            s: Union[str, int, bool],
+            default: Optional[bool] = False
+            ) -> Optional[bool]:
         """
         Convert a string or an int to a boolean.
 
@@ -720,7 +722,7 @@ class UType:
         return default
 
     @staticmethod
-    def bool_to_int_text(value: bool or str or int) -> str:
+    def bool_to_int_text(value: Union[str, int, bool]) -> str:
         """
         Take a boolean value and returns an integer.
 
@@ -732,7 +734,7 @@ class UType:
         return "0"
 
     @staticmethod
-    def bool_to_on_off(value: bool or str or int) -> str:
+    def bool_to_on_off(value: Union[str, int, bool]) -> str:
         """
         Convert a boolean value to either 'on' or 'off'.
 
@@ -747,7 +749,7 @@ class UType:
         return "Off"
 
     @staticmethod
-    def bool_to_str_state(value: bool or str or int) -> str:
+    def bool_to_str_state(value: Union[str, int, bool]) -> str:
         """
         Take a boolean value and returns "Ok"/"Not Ok" string.
 
@@ -759,7 +761,7 @@ class UType:
         return "Error"
 
     @staticmethod
-    def string_to_int_bool(text: bool or str or int) -> int:
+    def string_to_int_bool(text: Union[str, int, bool]) -> int:
         """
         Convert a string to an integer.
 
@@ -776,8 +778,8 @@ class UType:
     @staticmethod
     def string_to_float(
             text: str,
-            default: float or None = 0.0
-            ) -> float or None:
+            default: Optional[float] = 0.0
+            ) -> Optional[float]:
         """
         Convert a string to a float.
 
@@ -797,7 +799,7 @@ class UType:
         return default
 
     @staticmethod
-    def init_dict(data: dict or None) -> dict:
+    def init_dict(data: Optional[dict]) -> dict:
         """
         Return an empty dictionary if data is not an instance of dict.
 
@@ -810,8 +812,8 @@ class UType:
 
     @staticmethod
     def init_dict_key(
-            data: dict or None,
-            key: str or int or tuple,
+            data: Optional[dict],
+            key: Union[str, int, tuple],
             init_value: any
             ) -> dict:
         """
