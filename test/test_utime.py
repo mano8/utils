@@ -6,6 +6,7 @@ Use pytest package.
 """
 import time
 from datetime import datetime
+import pytest
 from ve_utils.utype import UType as Ut
 from ve_utils.utime import UTime, PerfStats
 
@@ -65,23 +66,26 @@ class TestUTime:
         ) is None
 
 
+@pytest.fixture(name="helper_manager", scope="class")
+def helper_manager_fixture():
+    """Json Schema test manager fixture"""
+    class HelperManager:
+        """Json Helper test manager fixture Class"""
+        def __init__(self):
+            self.obj = PerfStats()
+
+    return HelperManager()
+
+
 class TestPerfStats:
     """PerfStats unittest class."""
-    def setup_class(self):
-        """
-        setup any state tied to the execution of the given function.
-
-        Invoked for every test function in the module.
-        """
-        self.obj = PerfStats()
-
-    def test_perf_methods(self):
+    def test_perf_methods(self, helper_manager):
         """Test perf methods."""
-        assert not self.obj.has_perf()
-        assert not self.obj.has_perf_key("myKey")
+        assert not helper_manager.obj.has_perf()
+        assert not helper_manager.obj.has_perf_key("myKey")
 
-        self.obj.init_perf_key("myKey")
-        assert self.obj.has_perf_key("myKey")
+        helper_manager.obj.init_perf_key("myKey")
+        assert helper_manager.obj.has_perf_key("myKey")
         data = {
                 "start": 0.0,
                 "counter": 0,
@@ -90,35 +94,35 @@ class TestPerfStats:
                 "min": 0.0,
                 "max": 0.0,
             }
-        assert self.obj.get_perf_key("myKey") == data
-        assert self.obj.get_perf_key_stat("myKey", "counter") == 0
+        assert helper_manager.obj.get_perf_key("myKey") == data
+        assert helper_manager.obj.get_perf_key_stat("myKey", "counter") == 0
         data = {
             "counter": 0,
             "avg": 0.0,
             "min": 0.0,
             "max": 0.0,
         }
-        assert self.obj.serialize_perf_key("myKey") == data
+        assert helper_manager.obj.serialize_perf_key("myKey") == data
 
-        self.obj.init_perf(reset=True)
-        assert not self.obj.has_perf()
-        assert not self.obj.has_perf_key("myKey")
+        helper_manager.obj.init_perf(reset=True)
+        assert not helper_manager.obj.has_perf()
+        assert not helper_manager.obj.has_perf_key("myKey")
 
-        self.obj.start_perf_key("myKey")
-        assert self.obj.has_perf_key("myKey")
-        assert self.obj.get_perf_key_stat("myKey", "start") > 0
-        self.obj.init_perf(reset=True)
+        helper_manager.obj.start_perf_key("myKey")
+        assert helper_manager.obj.has_perf_key("myKey")
+        assert helper_manager.obj.get_perf_key_stat("myKey", "start") > 0
+        helper_manager.obj.init_perf(reset=True)
 
-    def test_start_end_perf_methods(self):
+    def test_start_end_perf_methods(self, helper_manager):
         """Test perf methods."""
         for i in range(1, 6):
-            self.obj.start_perf_key("myKey")
+            helper_manager.obj.start_perf_key("myKey")
             time.sleep(0.2 * i)
-            self.obj.end_perf_key("myKey")
+            helper_manager.obj.end_perf_key("myKey")
 
-        assert self.obj.has_perf_key("myKey")
-        assert self.obj.get_perf_key_stat("myKey", "counter") == 5
-        assert round(self.obj.get_perf_key_stat("myKey", "sum"), 0) == 3
-        assert round(self.obj.get_perf_key_stat("myKey", "avg"), 1) == 0.6
-        assert round(self.obj.get_perf_key_stat("myKey", "min"), 1) == 0.2
-        assert round(self.obj.get_perf_key_stat("myKey", "max"), 0) == 1
+        assert helper_manager.obj.has_perf_key("myKey")
+        assert helper_manager.obj.get_perf_key_stat("myKey", "counter") == 5
+        assert round(helper_manager.obj.get_perf_key_stat("myKey", "sum"), 0) == 3
+        assert round(helper_manager.obj.get_perf_key_stat("myKey", "avg"), 1) == 0.6
+        assert round(helper_manager.obj.get_perf_key_stat("myKey", "min"), 1) == 0.2
+        assert round(helper_manager.obj.get_perf_key_stat("myKey", "max"), 0) == 1
