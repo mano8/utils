@@ -1,2 +1,1 @@
-"""Package unittest."""
-
+"""Package pytest."""
