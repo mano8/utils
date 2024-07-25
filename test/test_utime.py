@@ -109,7 +109,7 @@ class TestPerfStats:
         assert self.obj.get_perf_key_stat("myKey", "start") > 0
         self.obj.init_perf(reset=True)
 
-    def test_perf_methods(self):
+    def test_start_end_perf_methods(self):
         """Test perf methods."""
         for i in range(1, 6):
             self.obj.start_perf_key("myKey")
