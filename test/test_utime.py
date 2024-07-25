@@ -31,7 +31,9 @@ class TestUTime:
             True
         ) == '28/08/2021 23:25:15 642899'
         assert UTime.time_to_string(None) is None
-        assert UTime.time_to_string(99999999999999999999999999999999999999999999999999999999999999999999999999) is None
+        assert UTime.time_to_string(
+            99999999999999999999999999999999999999999999999999999999999999999999999999
+            ) is None
 
     @staticmethod
     def test_get_elapsed_time():

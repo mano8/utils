@@ -147,12 +147,8 @@ class UTime:
                 gmt_tuple = time.gmtime(timestamp)
                 result = time.mktime(
                     time.strptime(
-                        "%s-%s-%s %s" % (
-                            str(gmt_tuple[2]),
-                            str(gmt_tuple[1]),
-                            str(gmt_tuple[0]),
-                            str(time_search)
-                        ),
+                        f"{str(gmt_tuple[2])}-{str(gmt_tuple[1])}"
+                        f"-{str(gmt_tuple[0])} {str(time_search)}",
                         "%d-%m-%Y %H:%M:%S"
                     )
                 )

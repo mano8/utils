@@ -3,8 +3,8 @@
 Json helper methods.
 Optional module.
 """
-import simplejson as json
 from typing import Optional
+import simplejson as json
 
 __author__ = "Eli Serra"
 __copyright__ = "Copyright 2020, Eli Serra"
@@ -26,7 +26,8 @@ class UJson:
             >>> UJson.loads_json("[0, 1, 2]")
             >>> [0, 1, 2]
             >>> UJson.loads_json("{key1")
-            >>> {JSONDecodeError}Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+            >>> {JSONDecodeError}Expecting property name enclosed in double quotes: 
+            >>> line 1 column 2 (char 1)
             # to desactivate exceptions set raise_errors to False
             # and method return None if exception occurs
             >>> UJson.loads_json("{key1", raise_errors=False)
@@ -86,7 +87,7 @@ class UJson:
         return result
 
     @staticmethod
-    def dumps_json(data: object, raise_errors: bool = True, *args, **kwargs):
+    def dumps_json(data: object, raise_errors: bool = True):
         """
         Return serialized json string from object.
 
@@ -104,7 +105,8 @@ class UJson:
         :param raise_errors: bool=True: Active or disable trowed exceptions.
             If False don't trow any exception only return None
         :return: Optional[object]:
-            Serialized json object as string, or None if raise_errors is False and exception is trowed
+            Serialized json object as string, 
+            or None if raise_errors is False and exception is trowed
         .. seealso::  https://simplejson.readthedocs.io/en/latest/#simplejson.dumps
         """
         result = None

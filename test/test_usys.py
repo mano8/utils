@@ -7,7 +7,7 @@ Use pytest package.
 import os
 import inspect
 from ve_utils.utype import UType as Ut
-from ve_utils.usys import USys as USys
+from ve_utils.usys import USys
 
 
 class TestUSys:
@@ -58,4 +58,3 @@ class TestUSys:
         """Test get_current_file_parent_path method."""
         current_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
         assert Ut.is_str(USys.get_current_file_parent_path(current_path))
-

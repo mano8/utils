@@ -62,11 +62,10 @@ class UType:
                     and maxi is not None
                     and maxi < mini):
             raise AttributeError(
-                "[UType::%s::has_valid_length] Fatal error : "
+                f"[UType::{UType.get_str(source)}::has_valid_length] Fatal error : "
                 "Unable to validate the value length, "
                 "eq  and/or mini and/or maxi are not valid."
-                "eq: %s - mini: %s - maxi: %s " %
-                (UType.get_str(source), eq, mini, maxi)
+                f"eq: {eq} - mini: {mini} - maxi: {maxi} "
             )
 
         if not test:
@@ -129,23 +128,23 @@ class UType:
         :raises TypeError: If the test value is True
             And length of value can't be determined.
         """
-        if (eq is not None
-                and (maxi is not None
-                     or mini is not None
-                     or not_null is True
-                     or positive is True
-                     or negative is True)) \
-                or (mini is not None
-                    and maxi is not None
-                    and maxi < mini):
+        is_mini_upper_maxi = mini is not None\
+            and maxi is not None\
+            and maxi < mini
+        is_not_compatible_with_eq = maxi is not None\
+            or mini is not None\
+            or not_null is True\
+            or positive is True\
+            or negative is True
+        if (eq is not None and is_not_compatible_with_eq) \
+                or is_mini_upper_maxi:
             raise AttributeError(
-                "[UType::%s::has_valid_value] Fatal error : "
+                f"[UType::{UType.get_str(source)}::has_valid_value] Fatal error : "
                 "Unable to validate the value of input, "
                 "if eq value is provided : "
                 "you can't provide not_null, positive, negative, mini or maxi values. "
                 "Or maxi value is bigger than mini value. "
-                "not_null: %s - eq: %s - mini: %s - maxi: %s " %
-                (UType.get_str(source), not_null, eq, mini, maxi)
+                f"not_null: {not_null} - eq: {eq} - mini: {mini} - maxi: {maxi} "
             )
 
         return test \
@@ -544,12 +543,8 @@ class UType:
         raise AttributeError(
             "[UType::is_valid_format] Fatal error : "
             "Bad data_type value, "
-            "must be in %s."
-            "value: %s - data_type: %s " %
-            (UType.get_valid_data_type_string_test(),
-             UType.get_str(value),
-             UType.get_str(data_type)
-             )
+            f"must be in {UType.get_valid_data_type_string_test()}."
+            f"value: {UType.get_str(value)} - data_type: {UType.get_str(data_type)} "
         )
 
     @staticmethod
@@ -659,12 +654,8 @@ class UType:
         raise AttributeError(
             "[UType::format_by_type] Fatal error : "
             "Bad data_type value, "
-            "must be in %s."
-            "value: %s - data_type: %s " %
-            (UType.get_valid_data_type_string_format(),
-             UType.get_str(value),
-             UType.get_str(data_type)
-             )
+            f"must be in {UType.get_valid_data_type_string_format()}."
+            f"value: {UType.get_str(value)} - data_type: {UType.get_str(data_type)}."
         )
 
     @staticmethod
@@ -685,8 +676,8 @@ class UType:
         """
         if UType.is_int(nb):
             if 10 > nb >= 0:
-                return "0%s" % nb
-            return "%s" % nb
+                return f"0{nb}"
+            return f"{nb}"
         return default
 
     @staticmethod

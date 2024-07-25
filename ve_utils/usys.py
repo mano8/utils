@@ -47,17 +47,10 @@ class USys:
         """Append formatted time to printed string."""
         res = UType.get_str(text_to_print)
         if with_time:
-            res = "%s - %s" % (
-                UTime.time_to_string(time.time()),
-                res
-            )
+            res = f"{UTime.time_to_string(time.time())} - {res}"
 
         if cls.color_list.get(color) is not None:
-            res = "%s%s%s" % (
-                cls.color_list[color],
-                res,
-                cls.color_list["ENDLINE"]
-            )
+            res = f"{cls.color_list[color]}{res}{cls.color_list['ENDLINE']}"
         return res
 
     @classmethod

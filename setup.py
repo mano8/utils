@@ -1,3 +1,4 @@
+"""Setup ve_utils"""
 import pathlib
 from setuptools import setup
 
